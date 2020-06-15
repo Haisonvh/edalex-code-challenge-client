@@ -10,7 +10,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://www.edalex.com/">
-        Edalex Code Challenge
+        Edalex
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -24,7 +24,9 @@ export default function App() {
       <Box my={1}>
         <AppBar />
         <MainBody />
-        <Copyright />
+        <Box my={2}>
+          <Copyright />
+        </Box>
       </Box>
     </Container>
   );

@@ -5,12 +5,12 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import {MessageEntity} from "../api/MessageEntity";
 
 interface Props {
   open: boolean;
   handleClose: Function;
-  message:String;
-  messId:number;
+  record:MessageEntity;
 }
 
 
@@ -29,11 +29,11 @@ export default function InfoDialog(props:Props) {
         maxWidth="sm"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Message id:" } {props.messId}
+          {"Message id:" } {props.record.id}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {props.message}
+            {props.record.message}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

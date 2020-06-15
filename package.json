@@ -12,10 +12,11 @@
   },
   "dependencies": {
     "@material-ui/core": "latest",
-    "@material-ui/icons": "latest",
+    "@material-ui/icons": "^4.9.1",
     "@types/react": "~16.9.23",
     "@types/react-dom": "~16.9.5",
     "axios": "^0.19.2",
+    "material-table": "latest",
     "react": "~16.13.0",
     "react-dom": "~16.13.0",
     "react-scripts-ts": "~3.1.0",
