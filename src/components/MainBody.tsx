@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Grid from '@material-ui/core/Grid';
 import TableView from "./TableView";
+import Notification from "./Notification"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,22 +36,21 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const useCollection = () => {
-  const [collection, setCollection] = React.useState<MessageEntity[]>([]);
-  const loadCollection = () => {
-    getAllMessages().then(collection =>
-      setCollection(collection)
-    );
-  };
-
-  return { collection, loadCollection };
-};
-
-
 export default function MainBody() {
 
-  const { collection, loadCollection } = useCollection();
+  //const { collection, loadCollection } = useCollection();
+  const [collection, setCollection] = React.useState<MessageEntity[]>([]);
+  const loadCollection = () => {
+    getAllMessages()
+      .then(collection => setCollection(collection))
+      .catch(error => {
+        //console.log(error);
+        handleOpenNotification('Cannot get data')});
+  };
+
   const [message, setMessage] = React.useState('');
+  const [openNotification,setOpenNotification] = React.useState(false);
+  const [notificationMess,setNotificationMess] = React.useState('');
 
   //pre-load the list
   React.useEffect(() => {
@@ -59,45 +59,67 @@ export default function MainBody() {
 
   const addNewMessage = () => {
     var data:MessageEntity={id:0, message:message, link:''};
-    postMessages(data).then(()=>loadCollection()).then(() => setMessage(""));
+    postMessages(data)
+      .then(()=>loadCollection()).then(() => setMessage(""))
+      .catch(error => {
+        //console.log(error);
+        handleOpenNotification('Cannot add message')});
   };
 
   const deleteMessage = (data:MessageEntity) => {
-    //console.log(data.id);
-    deleteMessages(data.id).then(()=>loadCollection());
+    deleteMessages(data.id)
+      .then(()=>loadCollection())
+      .catch(error => {
+        //console.log(error);
+        handleOpenNotification('Cannot delete message')});
+  }
+
+  const handleOpenNotification = (mess:string) => {
+    console.log(mess);
+    setOpenNotification(true);
+    setNotificationMess(mess);
+  }
+
+  const handleCloseNotification = () => {
+    setOpenNotification(false);
   }
 
   const classes = useStyles();
 
   return (
     <div style={{ width: '100%' }}>
-      <Grid container spacing={1}>
-        <Grid item xs={10}>
-          <TextField
-            value = {message}
-            className={classes.textField}
-            required
-            id="standard-required"
-            label="Required"
-            fullWidth
-            onChange = {event => setMessage(event.target.value)} />
-        </Grid>
-        <Grid item xs={2}>
-          <Button
-            onClick={addNewMessage}
-            variant="contained"
-            color="primary"
-            size="large"
-            className={classes.button}
-            startIcon={<AddCircleIcon />}
-            >
-            Add
+      <form onSubmit={addNewMessage}>
+        <Grid container spacing={1}>
+          <Grid item xs={10}>
+            <TextField
+              data-testid="test-textfield-add"
+              className={classes.textField}
+              required
+              id="standard-required"
+              label="Required"
+              fullWidth
+              onChange = {event => setMessage(event.target.value)} />
+          </Grid>
+          <Grid item xs={2}>
+            <Button
+              data-testid="test-button-add"
+              type="submit"
+              variant="contained"
+              color="primary"
+              size="large"
+              className={classes.button}
+              startIcon={<AddCircleIcon />}
+              >
+              Add
             </Button>
+          </Grid>
         </Grid>
-      </Grid>
+      </form>
+
       <Box display="flex" justifyContent="center">
         <TableView data={collection} deleteAction={deleteMessage}/>
       </Box>
+      <Notification open = {openNotification} handleClose = {handleCloseNotification} message = {notificationMess}/>
     </div>
   );
 }

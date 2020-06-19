@@ -26,7 +26,7 @@ export const deleteMessages = (id:number): Promise<void> => {
     return Axios.delete(apiUrl+"/"+id);
 };
 
-const mapDataListApiToModel = ({data}: AxiosResponse<any>): MessageEntity[] => {  
+const mapDataListApiToModel = ({data}: AxiosResponse<any>): MessageEntity[] => {
   const content = data.content;
   return content.map(message => ({
     id: message.id,

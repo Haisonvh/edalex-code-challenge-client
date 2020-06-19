@@ -7,7 +7,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import {MessageEntity} from "../api/MessageEntity";
 
-interface Props {
+export interface Props {
   open: boolean;
   handleClose: Function;
   record:MessageEntity;
@@ -21,6 +21,7 @@ export default function InfoDialog(props:Props) {
   return (
     <React.Fragment>
       <Dialog
+        data-testid="test-dialog"
         open={props.open}
         disableEscapeKeyDown = {true}
         disableBackdropClick = {true}
@@ -28,11 +29,11 @@ export default function InfoDialog(props:Props) {
         aria-describedby="alert-dialog-description"
         maxWidth="sm"
       >
-        <DialogTitle id="alert-dialog-title">
+        <DialogTitle id="alert-dialog-title" data-testid="test-dialog-title">
           {"Message id:" } {props.record.id}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
+          <DialogContentText id="alert-dialog-description" data-testid="test-dialog-description">
             {props.record.message}
           </DialogContentText>
         </DialogContent>

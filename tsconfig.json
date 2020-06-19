@@ -7,19 +7,19 @@
       "sourceMap": true,
       "allowJs": true,
       "jsx": "react",
-	  "moduleResolution": "node",
+      "moduleResolution": "node",
       "rootDir": "src",
       "noImplicitReturns": true,
       "noImplicitThis": true,
       "noImplicitAny": false,
-	  "esModuleInterop": true,
+      "esModuleInterop": true,
       "allowSyntheticDefaultImports": true,
-      "strictNullChecks": true,
-
+      "strictNullChecks": true
     },
     "exclude": [
       "node_modules",
-      "build"
+      "build",
+      "**/*.test.tsx"
     ],
     "types": [
       "typePatches"

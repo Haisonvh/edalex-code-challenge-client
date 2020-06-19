@@ -5,6 +5,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import App from './components/App';
 import theme from './components/theme';
 
+
 const appComponent = <div>Working test</div>
 
 ReactDOM.render(

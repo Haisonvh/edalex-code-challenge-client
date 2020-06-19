@@ -7,12 +7,12 @@ import Typography from '@material-ui/core/Typography';
 import InfoDialog from "./InfoDialog";
 
 
-interface Props{
+export interface Props{
   data:MessageEntity[],
   deleteAction:Function
 }
 
-export default function MultipleActions(props: Props) {
+export default function TableView(props: Props) {
   const handleDeleteRecord = (oldData:MessageEntity|MessageEntity[]) => {
     props.deleteAction(oldData);
   };
