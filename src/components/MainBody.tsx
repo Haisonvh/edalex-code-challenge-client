@@ -57,7 +57,8 @@ export default function MainBody() {
     loadCollection();
   },[]);
 
-  const addNewMessage = () => {
+  const addNewMessage = e => {
+    e.preventDefault();
     var data:MessageEntity={id:0, message:message, link:''};
     postMessages(data)
       .then(()=>loadCollection()).then(() => setMessage(""))
@@ -94,6 +95,7 @@ export default function MainBody() {
             <TextField
               data-testid="test-textfield-add"
               className={classes.textField}
+              value = {message}
               required
               id="standard-required"
               label="Required"

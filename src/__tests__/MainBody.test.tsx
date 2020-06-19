@@ -176,7 +176,7 @@ describe("MainBody test delete data", () => {
     act(() => {
       render(<MainBody/>);
     });
-    
+
     const buttonDelete = await screen.findByTitle("Delete Message");
     const mock = new MockAdapter(axios);
     const url = "http://localhost:8080/api/messages";

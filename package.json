@@ -25,12 +25,12 @@
     "typescript": "latest"
   },
   "devDependencies": {
-    "axios-mock-adapter": "latest",
     "@testing-library/jest-dom": "latest",
     "@testing-library/react": "latest",
     "@testing-library/react-hooks": "latest",
-    "jest": "latest",
-    "ts-jest": "latest",
-    "@types/jest": "latest"
+    "@types/jest": "latest",
+    "axios-mock-adapter": "latest",
+    "jest": "^26.0.1",
+    "ts-jest": "latest"
   }
 }
